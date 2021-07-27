@@ -22,8 +22,7 @@ class CheckOutPage_2(BasePage):
     @allure.step("Getting title of the Checkout2 page")
     def get_title(self):
         self.wait_for_element(self.TITLE)
-        title = self.get_element_text(self.TITLE)
-        return title
+        return self.get_element_text(self.TITLE)
 
     @allure.step("Checking url of the Checkout2 page")
     def check_url(self):
@@ -32,44 +31,37 @@ class CheckOutPage_2(BasePage):
     @allure.step("Getting description label")
     def get_desc_label_cart(self):
         self.wait_for_element(self.CART_DESC_LABEL)
-        text = self.get_element_text(self.CART_DESC_LABEL)
-        return text
+        return self.get_element_text(self.CART_DESC_LABEL)
 
     @allure.step("Getting quantity label")
     def get_qty_label_cart(self):
         self.wait_for_element(self.CART_QUANTITY_LABEL)
-        text = self.get_element_text(self.CART_QUANTITY_LABEL)
-        return text
+        return self.get_element_text(self.CART_QUANTITY_LABEL)
 
     @allure.step("Getting quantity")
     def get_qty_cart(self):
         self.wait_for_element(self.CART_QUANTITY)
-        text = self.get_element_text(self.CART_QUANTITY)
-        return text
+        return self.get_element_text(self.CART_QUANTITY)
 
     @allure.step("Getting price of the item")
     def get_item_price(self):
         self.wait_for_element(self.ITEM_PRICE)
-        text = self.get_element_text(self.ITEM_PRICE)
-        return text
+        return self.get_element_text(self.ITEM_PRICE)
 
     @allure.step("Getting subtotal")
     def get_subtotal(self):
         self.wait_for_element(self.SUBTOTAL)
-        text = self.get_element_text(self.SUBTOTAL)
-        return text
+        return self.get_element_text(self.SUBTOTAL)
 
     @allure.step("Getting tax")
     def get_tax(self):
         self.wait_for_element(self.TAX)
-        text = self.get_element_text(self.TAX)
-        return text
+        return self.get_element_text(self.TAX)
 
     @allure.step("Getting total price")
     def get_total_price(self):
         self.wait_for_element(self.TOTAL)
-        text = self.get_element_text(self.TOTAL)
-        return text
+        return self.get_element_text(self.TOTAL)
 
     @allure.step("Finishing checkout")
     def finish_checkout(self):

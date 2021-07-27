@@ -16,8 +16,7 @@ class CheckOutPage_Finish(BasePage):
     @allure.step("Getting title of the Checkout Finish page")
     def get_title(self):
         self.wait_for_element(self.TITLE)
-        title = self.get_element_text(self.TITLE)
-        return title
+        return self.get_element_text(self.TITLE)
 
     @allure.step("Checking url of the Checkout Finish page")
     def check_url(self):
@@ -26,14 +25,12 @@ class CheckOutPage_Finish(BasePage):
     @allure.step("Getting checkout header")
     def get_checkout_header(self):
         self.wait_for_element(self.H2_COMPLETE_ORDER)
-        text = self.get_element_text(self.H2_COMPLETE_ORDER)
-        return text
+        return self.get_element_text(self.H2_COMPLETE_ORDER)
 
     @allure.step("Getting checkout message")
     def get_checkout_message(self):
         self.wait_for_element(self.COMPLETE_TEXT)
-        text = self.get_element_text(self.COMPLETE_TEXT)
-        return text
+        return self.get_element_text(self.COMPLETE_TEXT)
 
     @allure.step("Getting back home")
     def go_back_home(self):

@@ -128,14 +128,12 @@ class InventoryPage(BasePage):
     @allure.step("Getting description of the item")
     def get_item_description(self, item):
         link = (By.XPATH, f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_desc'][1]")
-        desc = self.get_element_text(link)
-        return desc
+        return self.get_element_text(link)
 
     @allure.step("Getting price ot the item")
     def get_item_price(self, item):
         link = (By.XPATH, f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_price'][1]")
-        price = self.get_element_text(link)
-        return price
+        return self.get_element_text(link)
 
     @allure.step("Adding item to the cart")
     def add_to_cart(self):
@@ -149,14 +147,12 @@ class InventoryPage(BasePage):
 
     @allure.step("Verification of the empty cart")
     def empty_cart(self):
-        status = self.is_not_visible(self.CART_BADGE)
-        return status
+        return self.is_not_visible(self.CART_BADGE)
 
     @allure.step("Checking cart")
     def check_cart(self):
         self.wait_for_element(self.CART_BADGE)
-        number = self.get_element_text(self.CART_BADGE)
-        return number
+        return self.get_element_text(self.CART_BADGE)
 
     @allure.step("Checking url of the Inventory page")
     def check_url(self):

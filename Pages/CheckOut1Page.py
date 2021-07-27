@@ -21,8 +21,7 @@ class CheckOutPage_1(BasePage):
     @allure.step("Getting title of the Checkout1 page")
     def get_title(self):
         self.wait_for_element(self.TITLE)
-        title = self.get_element_text(self.TITLE)
-        return title
+        return self.get_element_text(self.TITLE)
 
     @allure.step("Checking url of the Checkout1 page")
     def check_url(self):
@@ -68,8 +67,7 @@ class CheckOutPage_1(BasePage):
     @allure.step("Getting error message")
     def get_error_message(self):
         self.wait_for_element(self.ERROR_MSG)
-        text = self.get_element_text(self.ERROR_MSG)
-        return text
+        return self.get_element_text(self.ERROR_MSG)
 
     @allure.step("Getting error SVG")
     def get_error_svg(self):

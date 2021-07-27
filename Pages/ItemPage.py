@@ -34,20 +34,17 @@ class ItemPage(BasePage):
     @allure.step("Getting name of the item")
     def get_item_name(self):
         self.wait_for_element(self.ITEM_NAME)
-        text = self.get_element_text(self.ITEM_NAME)
-        return text
+        return self.get_element_text(self.ITEM_NAME)
 
     @allure.step("Getting description of the item")
     def get_item_description(self):
         self.wait_for_element(self.ITEM_DESC)
-        text = self.get_element_text(self.ITEM_DESC)
-        return text
+        return self.get_element_text(self.ITEM_DESC)
 
     @allure.step("Getting price of the item")
     def get_item_price(self):
         self.wait_for_element(self.ITEM_PRICE)
-        text = self.get_element_text(self.ITEM_PRICE)
-        return text
+        return self.get_element_text(self.ITEM_PRICE)
 
     @allure.step("Checking url of the Item page")
     def check_url(self):

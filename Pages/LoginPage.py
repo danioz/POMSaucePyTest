@@ -38,8 +38,7 @@ class LoginPage(BasePage):
     @allure.step("Getting error message")
     def get_error_message(self):
         self.wait_for_element(self.ERROR_MSG)
-        text = self.get_element_text(self.ERROR_MSG)
-        return text
+        return self.get_element_text(self.ERROR_MSG)
 
     @allure.step("Getting all inputs from the Login page")
     def get_inputs(self):
