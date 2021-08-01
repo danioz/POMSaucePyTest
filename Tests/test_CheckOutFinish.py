@@ -4,7 +4,8 @@ import allure
 import Config.config
 from Tests.test_base import BaseTest
 
-
+@allure.suite('Test Checkout Finish')
+@allure.sub_suite('Test Checkout Finish')
 class Test_CheckOut_Finish(BaseTest):
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
@@ -14,6 +15,8 @@ class Test_CheckOut_Finish(BaseTest):
     expected_checkout_finish_url = Config.config.Test_Data.CHECKOUT_FINISH_URL
 
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Checking finalizing checkout procedure')
+    @allure.description('Going to the checkout, verifying price and finalizing checkout procedure')
     def test_finish_checkout(self):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'

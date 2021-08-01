@@ -18,7 +18,7 @@ class SideBarPage(BasePage):
         self.wait_for_element(self.BTN_BURGER_MENU)
         self.do_click(self.BTN_BURGER_MENU)
 
-    @allure.step("Resetign application state")
+    @allure.step("Resetting application state")
     def do_reset(self):
         self.wait_for_element(self.BTN_RESET)
         self.do_click(self.BTN_RESET)
@@ -28,7 +28,7 @@ class SideBarPage(BasePage):
         self.wait_for_element(self.BTN_LOGOUT)
         self.do_click(self.BTN_LOGOUT)
 
-    @allure.step("Loggin out")
+    @allure.step("Logging out")
     def do_logout(self):
         self.open_burger_menu()
         self.do_reset()

@@ -4,7 +4,8 @@ import allure
 import Config.config
 from Tests.test_base import BaseTest
 
-
+@allure.suite('Test Checkout 1')
+@allure.sub_suite('Test Checkout 1')
 class Test_CheckOut_1(BaseTest):
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
@@ -13,11 +14,12 @@ class Test_CheckOut_1(BaseTest):
     expected_checkout2_url = Config.config.Test_Data.CHECKOUT2_URL
 
     @allure.severity(allure.severity_level.BLOCKER)
+    @allure.title('Checking elements in checkout page ')
+    @allure.description('Going to the checkout and verifying elements')
     @pytest.mark.parametrize("expected_inputs", [['First Name', 'Last Name', 'Zip/Postal Code']])
     def test_checkout_page(self, expected_inputs):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url
-
         self.cartPage.checkout()
         assert self.checkout1Page.check_url() == self.expected_checkout1_url
         assert self.checkout1Page.get_title() == 'CHECKOUT: YOUR INFORMATION'
@@ -25,6 +27,8 @@ class Test_CheckOut_1(BaseTest):
         assert current_inputs == expected_inputs
 
     @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Checking error messages')
+    @allure.description('Going to the checkout and verifying possible error messages due to lack of inputs')
     def test_fill_checkout_errors(self):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url
@@ -41,6 +45,8 @@ class Test_CheckOut_1(BaseTest):
         assert self.checkout1Page.get_error_svg() == True
 
     @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Checking cancelling checkout')
+    @allure.description('Going to the checkout and cancelling checkout procedure')
     def test_cancel_checkout(self):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url
@@ -52,6 +58,8 @@ class Test_CheckOut_1(BaseTest):
         assert self.cartPage.check_url() == self.expected_cart_url
 
     @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Checking checkout procedure')
+    @allure.description('Going to the checkout and continue checkout procedure')
     def test_fill_checkout_continue(self):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url

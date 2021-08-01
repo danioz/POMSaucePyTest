@@ -4,7 +4,8 @@ import allure
 import Config.config
 from Tests.test_base import BaseTest
 
-
+@allure.suite('Test Checkout 2')
+@allure.sub_suite('Test Checkout 2')
 class Test_CheckOut_2(BaseTest):
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
@@ -13,6 +14,8 @@ class Test_CheckOut_2(BaseTest):
     expected_checkout2_url = Config.config.Test_Data.CHECKOUT2_URL
 
     @allure.severity(allure.severity_level.BLOCKER)
+    @allure.title('Checking elements in the second checkout page ')
+    @allure.description('Going to the second checkout page and verifying elements')
     def test_checkout2_page(self):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url
@@ -31,6 +34,8 @@ class Test_CheckOut_2(BaseTest):
         assert self.checkout2Page.get_total_price() == 'Total: $0.00'
 
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Checking cancelling checkout')
+    @allure.description('Going to the checkout and cancelling checkout procedure')
     def test_cancel_checkout(self):
         self.inventoryPage.enter_cart()
         self.cartPage.checkout()
@@ -44,6 +49,8 @@ class Test_CheckOut_2(BaseTest):
         assert self.inventoryPage.check_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Checking checkout procedure')
+    @allure.description('Going to the checkout, verifying price and continue checkout procedure')
     def test_price_checkout(self):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'

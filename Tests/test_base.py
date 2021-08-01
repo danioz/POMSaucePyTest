@@ -1,3 +1,4 @@
+import allure
 import pytest
 from Config.config import Test_Data
 

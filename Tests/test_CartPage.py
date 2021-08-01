@@ -4,7 +4,8 @@ import allure
 import Config.config
 from Tests.test_base import BaseTest
 
-
+@allure.suite('Test Cart')
+@allure.sub_suite('Test Cart')
 class Test_Cart(BaseTest):
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
@@ -12,6 +13,8 @@ class Test_Cart(BaseTest):
     expected_checkout1_url = Config.config.Test_Data.CHECKOUT1_URL
 
     @allure.severity(allure.severity_level.BLOCKER)
+    @allure.title('Checking elements in Cart')
+    @allure.description('Going to the cart and verifying elements')
     def test_go_to_cart(self):
         self.inventoryPage.enter_cart()
         assert self.cartPage.check_url() == self.expected_cart_url
@@ -20,6 +23,8 @@ class Test_Cart(BaseTest):
         assert self.cartPage.get_qty_label_cart() == 'QTY'
 
     @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Continue shopping')
+    @allure.description('Adding item to the cart, then remove it from the cart. Continue shopping and add item to the cart')
     def test_continue_shopping(self):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'
@@ -37,6 +42,8 @@ class Test_Cart(BaseTest):
         assert self.inventoryPage.check_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Going to the checkout page')
+    @allure.description('Adding item to the cart and checkout')
     def test_checkout(self):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'
