@@ -23,10 +23,6 @@ class CheckOutPage_1(BasePage):
         self.wait_for_element(self.TITLE)
         return self.get_element_text(self.TITLE)
 
-    @allure.step("Checking url of the Checkout1 page")
-    def check_url(self):
-        return self.get_current_url()
-
     @allure.step("Getting inputs from the Checkout1 page")
     def get_inputs(self, name):
         list = []

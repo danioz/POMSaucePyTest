@@ -153,7 +153,3 @@ class InventoryPage(BasePage):
     def check_cart(self):
         self.wait_for_element(self.CART_BADGE)
         return self.get_element_text(self.CART_BADGE)
-
-    @allure.step("Checking url of the Inventory page")
-    def check_url(self):
-        return self.get_current_url()

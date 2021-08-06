@@ -50,10 +50,6 @@ class LoginPage(BasePage):
             list.append(attribute)
         return list
 
-    @allure.step("Checking url of the Login page")
-    def check_url(self):
-        return self.get_current_url()
-
     @allure.step("Logging with the provided username and password")
     def do_login(self, username, password):
         self.input_username(username)

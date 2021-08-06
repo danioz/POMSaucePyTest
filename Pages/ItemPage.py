@@ -45,7 +45,3 @@ class ItemPage(BasePage):
     def get_item_price(self):
         self.wait_for_element(self.ITEM_PRICE)
         return self.get_element_text(self.ITEM_PRICE)
-
-    @allure.step("Checking url of the Item page")
-    def check_url(self):
-        return self.get_current_url()

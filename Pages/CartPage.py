@@ -61,7 +61,3 @@ class CartPage(BasePage):
     def continue_shopping(self):
         self.wait_for_element(self.BTN_CONTINUE_SHOPPING)
         self.do_click(self.BTN_CONTINUE_SHOPPING)
-
-    @allure.step("Checking url of the Cart page")
-    def check_url(self):
-        return self.get_current_url()

@@ -24,10 +24,6 @@ class CheckOutPage_2(BasePage):
         self.wait_for_element(self.TITLE)
         return self.get_element_text(self.TITLE)
 
-    @allure.step("Checking url of the Checkout2 page")
-    def check_url(self):
-        return self.get_current_url()
-
     @allure.step("Getting description label")
     def get_desc_label_cart(self):
         self.wait_for_element(self.CART_DESC_LABEL)

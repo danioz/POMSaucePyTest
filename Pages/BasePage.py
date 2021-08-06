@@ -20,7 +20,8 @@ class BasePage:
     def screenshot_allure(self):
         allure.attach(self.driver.get_screenshot_as_png(), name='FAIL', attachment_type=AttachmentType.PNG)
 
-    def get_current_url(self):
+    @allure.step("Checking url of the page")
+    def check_url(self):
         return self.driver.current_url
 
     def wait_for_element(self, by_locator, timeout=10, pollFrequency=0.5):

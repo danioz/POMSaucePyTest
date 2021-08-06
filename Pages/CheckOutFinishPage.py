@@ -18,10 +18,6 @@ class CheckOutPage_Finish(BasePage):
         self.wait_for_element(self.TITLE)
         return self.get_element_text(self.TITLE)
 
-    @allure.step("Checking url of the Checkout Finish page")
-    def check_url(self):
-        return self.get_current_url()
-
     @allure.step("Getting checkout header")
     def get_checkout_header(self):
         self.wait_for_element(self.H2_COMPLETE_ORDER)
