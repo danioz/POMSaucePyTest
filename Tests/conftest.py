@@ -1,18 +1,16 @@
-import allure
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
-from Config.config import Test_Data
-from Pages.LoginPage import LoginPage
-from Pages.InventoryPage import InventoryPage
-from Pages.ItemPage import ItemPage
-from Pages.SideBarPage import SideBarPage
-from Pages.CartPage import CartPage
-from Pages.CheckOut1Page import CheckOutPage_1
-from Pages.CheckOut2Page import CheckOutPage_2
-from Pages.CheckOutFinishPage import CheckOutPage_Finish
+from Pages.Login.LoginPage import LoginPage
+from Pages.Inventory.InventoryPage import InventoryPage
+from Pages.Item.ItemPage import ItemPage
+from Pages.SideBar.SideBarPage import SideBarPage
+from Pages.Cart.CartPage import CartPage
+from Pages.CheckOut1.CheckOut1Page import CheckOutPage_1
+from Pages.CheckOut2.CheckOut2Page import CheckOutPage_2
+from Pages.CheckOutFinish.CheckOutFinishPage import CheckOutPage_Finish
 
 web_driver = None
 

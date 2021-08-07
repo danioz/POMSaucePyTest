@@ -2,7 +2,7 @@ import pytest
 import allure
 
 import Config.config
-from Pages.LoginPage import LoginPage
+from Pages.Login.LoginPage import LoginPage
 from Tests.test_base_login import BaseLoginTest
 from Config.config import Test_Data
 
@@ -89,12 +89,10 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying getting error messages')
     @allure.description('Open login page, provide incorrect credentials and confirming getting error messages')
     @pytest.mark.parametrize("username, password, error_message",
-                             [['locked_out_user', 'secret_sauce',
-                               'Epic sadface: Sorry, this user has been locked out.'],
+                             [['locked_out_user', 'secret_sauce', 'Epic sadface: Sorry, this user has been locked out.'],
                               ['standard_user', '', 'Epic sadface: Password is required'],
                               ['', 'secret_sauce', 'Epic sadface: Username is required'],
-                              ['username', 'password',
-                               'Epic sadface: Username and password do not match any user in this service']
+                              ['username', 'password', 'Epic sadface: Username and password do not match any user in this service']
                               ])
     def test_failed_login_scenario(self, username, password, error_message):
         self.loginPage = LoginPage(self.driver)
