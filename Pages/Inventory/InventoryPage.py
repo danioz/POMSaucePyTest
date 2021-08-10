@@ -1,3 +1,5 @@
+import time
+
 import allure
 
 from Pages.BasePage import BasePage
@@ -124,3 +126,15 @@ class InventoryPage(BasePage):
     def check_cart(self):
         self.wait_for_element(Elements.CART_BADGE)
         return self.get_element_text(Elements.CART_BADGE)
+
+
+    def add_item_to_cart(self,item):
+        element = (By.XPATH, f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]")
+        self.do_click(element)
+
+    def remove_item_from_cart(self,item):
+        element = (By.XPATH, f"//button[contains(@id,'remove') and contains(@id,'{item}')]")
+        self.do_click(element)
+
+    def list_item(self):
+        pass

@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 import Config.config
 from Tests.test_base import BaseTest
@@ -33,4 +34,16 @@ class Test_Inventory(BaseTest):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'
         self.inventoryPage.remove_from_cart()
+        assert True == self.inventoryPage.empty_cart()
+
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Adding/Removing one item to cart')
+    @allure.description('Adding individual item to the cart, checking cart, removing item and then verifying empty cart')
+    @pytest.mark.parametrize("item",
+                             [("backpack"), ("bike-light"),("bolt-t-shirt"),
+                              ("fleece-jacket"),("onesie"),("t-shirt-(red)")])
+    def test_add_to_cart_one_item_then_remove(self, item):
+        self.inventoryPage.add_item_to_cart(item)
+        assert self.inventoryPage.check_cart() == '1'
+        self.inventoryPage.remove_item_from_cart(item)
         assert True == self.inventoryPage.empty_cart()
