@@ -12,73 +12,59 @@ class InventoryPage(BasePage):
 
     @allure.step("Getting title of the Inventory page")
     def get_title(self):
-        self.wait_for_element(Elements.TITLE)
         title = self.get_element_text(Elements.TITLE)
         return title
 
     @allure.step("Entering cart")
     def enter_cart(self):
-        self.wait_for_element(Elements.CART)
         self.do_click(Elements.CART)
 
     @allure.step("Adding Sauce Labs Backpack")
     def add_backpack(self):
-        self.wait_for_element(Elements.ADD_BACKPACK)
         self.do_click(Elements.ADD_BACKPACK)
 
     @allure.step("Adding Sauce Labs Bike Light")
     def add_bike_light(self):
-        self.wait_for_element(Elements.ADD_BIKE_LIGHT)
         self.do_click(Elements.ADD_BIKE_LIGHT)
 
     @allure.step("Adding Sauce Labs Bolt T-Shirt")
     def add_t_shirt(self):
-        self.wait_for_element(Elements.ADD_T_SHIRT)
         self.do_click(Elements.ADD_T_SHIRT)
 
     @allure.step("Adding Sauce Labs Fleece Jacket")
     def add_jacket(self):
-        self.wait_for_element(Elements.ADD_JACKET)
         self.do_click(Elements.ADD_JACKET)
 
     @allure.step("Adding Sauce Labs Onesie")
     def add_onesie(self):
-        self.wait_for_element(Elements.ADD_ONESIE)
         self.do_click(Elements.ADD_ONESIE)
 
     @allure.step("Adding Test.allTheThings() T-Shirt (Red)")
     def add_red_t_shirt(self):
-        self.wait_for_element(Elements.ADD_RED_T_SHIRT)
         self.do_click(Elements.ADD_RED_T_SHIRT)
 
     @allure.step("Removing Sauce Labs Backpack")
     def remove_backpack(self):
-        self.wait_for_element(Elements.REMOVE_BACKPACK)
         self.do_click(Elements.REMOVE_BACKPACK)
 
     @allure.step("Removing Sauce Labs Bike Light")
     def remove_bike_light(self):
-        self.wait_for_element(Elements.REMOVE_BIKE_LIGHT)
         self.do_click(Elements.REMOVE_BIKE_LIGHT)
 
     @allure.step("Removing Sauce Labs Bolt T-Shirt")
     def remove_t_shirt(self):
-        self.wait_for_element(Elements.REMOVE_T_SHIRT)
         self.do_click(Elements.REMOVE_T_SHIRT)
 
     @allure.step("Removing Sauce Labs Fleece Jacket")
     def remove_jacket(self):
-        self.wait_for_element(Elements.REMOVE_JACKET)
         self.do_click(Elements.REMOVE_JACKET)
 
     @allure.step("Removing Sauce Labs Onesie")
     def remove_onesie(self):
-        self.wait_for_element(Elements.ADD_ONESIE)
         self.do_click(Elements.ADD_ONESIE)
 
     @allure.step("Removing Test.allTheThings() T-Shirt (Red)")
     def remove_red_t_shirt(self):
-        self.wait_for_element(Elements.REMOVE_RED_T_SHIRT)
         self.do_click(Elements.REMOVE_RED_T_SHIRT)
 
     @allure.step("Adding item with link")
@@ -108,12 +94,10 @@ class InventoryPage(BasePage):
 
     @allure.step("Adding item to the cart")
     def add_to_cart(self):
-        self.wait_for_element(Elements.ADD_TO_CART)
         self.do_click(Elements.ADD_TO_CART)
 
     @allure.step("Removing item from the cart")
     def remove_from_cart(self):
-        self.wait_for_element(Elements.REMOVE_FROM_CART)
         self.do_click(Elements.REMOVE_FROM_CART)
 
     @allure.step("Verification of the empty cart")
@@ -122,24 +106,22 @@ class InventoryPage(BasePage):
 
     @allure.step("Checking cart")
     def check_cart(self):
-        self.wait_for_element(Elements.CART_BADGE)
         return self.get_element_text(Elements.CART_BADGE)
 
-
-    def add_item_to_cart(self,item):
+    def add_item_to_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]")
         self.do_click(element)
 
-    def remove_item_from_cart(self,item):
+    def remove_item_from_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'remove') and contains(@id,'{item}')]")
         self.do_click(element)
 
     def list_of_available_item(self):
-        item_list=[]
+        item_list = []
         items = Elements.ADD_TO_CART
         self.wait_for_element(items)
         elements = self.get_elements(items)
         for element in elements:
-            id=str(self.get_element_attribute(element)[23:])
+            id = str(self.get_element_attribute(element)[23:])
             item_list.append(id)
         return item_list

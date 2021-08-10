@@ -17,28 +17,23 @@ class LoginPage(BasePage):
 
     @allure.step("Providing username")
     def input_username(self, username):
-        self.wait_for_element(Elements.INPUT_USERNAME)
         self.do_send_keys(Elements.INPUT_USERNAME, username)
 
     @allure.step("Providing password")
     def input_password(self, password):
-        self.wait_for_element(Elements.INPUT_PASSWORD)
         self.do_send_keys(Elements.INPUT_PASSWORD, password)
 
     @allure.step("Clicking login button")
     def click_login(self):
-        self.wait_for_element(Elements.BTN_LOGIN)
         self.do_click(Elements.BTN_LOGIN)
 
     @allure.step("Getting error message")
     def get_error_message(self):
-        self.wait_for_element(Elements.ERROR_MSG)
         return self.get_element_text(Elements.ERROR_MSG)
 
     @allure.step("Getting all inputs from the Login page")
     def get_inputs(self):
         list = []
-        self.wait_for_element(Elements.INPUTS_PAGE)
         inputs = self.get_elements(Elements.INPUTS_PAGE)
         for input in inputs:
             attribute = self.get_element_attribute(input)

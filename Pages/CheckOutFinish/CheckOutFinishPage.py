@@ -11,22 +11,18 @@ class CheckOutPage_Finish(BasePage):
 
     @allure.step("Getting title of the Checkout Finish page")
     def get_title(self):
-        self.wait_for_element(Elements.TITLE)
         return self.get_element_text(Elements.TITLE)
 
     @allure.step("Getting checkout header")
     def get_checkout_header(self):
-        self.wait_for_element(Elements.H2_COMPLETE_ORDER)
         return self.get_element_text(Elements.H2_COMPLETE_ORDER)
 
     @allure.step("Getting checkout message")
     def get_checkout_message(self):
-        self.wait_for_element(Elements.COMPLETE_TEXT)
         return self.get_element_text(Elements.COMPLETE_TEXT)
 
     @allure.step("Getting back home")
     def go_back_home(self):
-        self.wait_for_element(Elements.BTN_BACK_HOME)
         self.do_click(Elements.BTN_BACK_HOME)
         from Pages.Inventory.InventoryPage import InventoryPage
         return InventoryPage(self.driver)
