@@ -28,3 +28,5 @@ class CheckOutPage_Finish(BasePage):
     def go_back_home(self):
         self.wait_for_element(Elements.BTN_BACK_HOME)
         self.do_click(Elements.BTN_BACK_HOME)
+        from Pages.Inventory.InventoryPage import InventoryPage
+        return InventoryPage(self.driver)

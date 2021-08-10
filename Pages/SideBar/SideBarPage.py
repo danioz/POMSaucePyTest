@@ -32,3 +32,5 @@ class SideBarPage(BasePage):
         self.do_reset()
         time.sleep(1)
         self.click_logout()
+        from Pages.Login.LoginPage import LoginPage
+        return LoginPage(self.driver)

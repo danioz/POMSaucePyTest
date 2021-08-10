@@ -50,3 +50,5 @@ class LoginPage(BasePage):
         self.input_username(username)
         self.input_password(password)
         self.click_login()
+        from Pages.Inventory.InventoryPage import InventoryPage
+        return InventoryPage(self.driver)

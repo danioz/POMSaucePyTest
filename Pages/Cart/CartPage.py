@@ -47,8 +47,12 @@ class CartPage(BasePage):
     def checkout(self):
         self.wait_for_element(Elements.BTN_CHECKOUT)
         self.do_click(Elements.BTN_CHECKOUT)
+        from Pages.CheckOut1.CheckOut1Page import CheckOutPage_1
+        return CheckOutPage_1(self.driver)
 
     @allure.step("Continue shopping")
     def continue_shopping(self):
         self.wait_for_element(Elements.BTN_CONTINUE_SHOPPING)
         self.do_click(Elements.BTN_CONTINUE_SHOPPING)
+        from Pages.Inventory.InventoryPage import InventoryPage
+        return InventoryPage(self.driver)

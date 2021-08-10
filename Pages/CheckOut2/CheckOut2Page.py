@@ -53,8 +53,12 @@ class CheckOutPage_2(BasePage):
     def finish_checkout(self):
         self.wait_for_element(Elements.BTN_FINISH)
         self.do_click(Elements.BTN_FINISH)
+        from Pages.CheckOutFinish.CheckOutFinishPage import CheckOutPage_Finish
+        return CheckOutPage_Finish(self.driver)
 
     @allure.step("Cancelling checkout")
     def cancel_checkout(self):
         self.wait_for_element(Elements.BTN_CANCEL)
         self.do_click(Elements.BTN_CANCEL)
+        from Pages.Inventory.InventoryPage import InventoryPage
+        return InventoryPage(self.driver)

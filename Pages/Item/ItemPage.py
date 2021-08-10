@@ -23,6 +23,8 @@ class ItemPage(BasePage):
     def back_to_products(self):
         self.wait_for_element(Elements.BTN_BACK_TO_PRODUCTS)
         self.do_click(Elements.BTN_BACK_TO_PRODUCTS)
+        from Pages.Inventory.InventoryPage import InventoryPage
+        return InventoryPage(self.driver)
 
     @allure.step("Getting name of the item")
     def get_item_name(self):
