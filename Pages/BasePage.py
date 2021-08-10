@@ -43,24 +43,22 @@ class BasePage:
     def get_element(self, by_locator):
         element = None
         try:
-            element = self.driver.find_element(by_locator[0], by_locator[1])
-            self.log.info(f"Element GOT with the locator {by_locator}")
+            self.wait_for_element(by_locator)
         except:
             self.log.error(f"Element {by_locator} NOT got")
             self.screenshot_allure()
             raise AssertionError(f"Element {by_locator} NOT got")
-        return element
+        return self.driver.find_element(by_locator[0], by_locator[1])
 
     def get_elements(self, by_locator):
         elements = None
         try:
-            elements = self.driver.find_elements(by_locator[0], by_locator[1])
-            self.log.info(f"Web-elements added to list")
+            self.wait_for_element(by_locator)
         except:
             self.log.error(f"Elements {by_locator} NOT got")
             self.screenshot_allure()
             raise AssertionError(f"Elements {by_locator} NOT got")
-        return elements
+        return self.driver.find_elements(by_locator[0], by_locator[1])
 
     def do_send_keys(self, by_locator, text):
         try:
