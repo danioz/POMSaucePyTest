@@ -15,11 +15,11 @@ class LoginPage(BasePage):
     def get_login_page_title(self):
         return self.get_title()
 
-    @allure.step("Providing username")
+    @allure.step("Providing username: '{1}'")
     def input_username(self, username):
         self.do_send_keys(Elements.INPUT_USERNAME, username)
 
-    @allure.step("Providing password")
+    @allure.step("Providing password: '{1}'")
     def input_password(self, password):
         self.do_send_keys(Elements.INPUT_PASSWORD, password)
 
@@ -40,7 +40,7 @@ class LoginPage(BasePage):
             list.append(attribute)
         return list
 
-    @allure.step("Logging with the provided username and password")
+    @allure.step("Logging with the provided username: '{1}' and password: '{2}'")
     def do_login(self, username, password):
         self.input_username(username)
         self.input_password(password)

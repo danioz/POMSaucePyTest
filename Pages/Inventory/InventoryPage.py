@@ -108,14 +108,17 @@ class InventoryPage(BasePage):
     def check_cart(self):
         return self.get_element_text(Elements.CART_BADGE)
 
+    @allure.step("Adding '{1}' to the cart")
     def add_item_to_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]")
         self.do_click(element)
 
+    @allure.step("Removing '{1}' from the cart")
     def remove_item_from_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'remove') and contains(@id,'{item}')]")
         self.do_click(element)
 
+    @allure.step("Returning list of available items")
     def list_of_available_item(self):
         item_list = []
         items = Elements.ADD_TO_CART
