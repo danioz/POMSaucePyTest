@@ -12,12 +12,11 @@ from Pages.CheckOut1.CheckOut1Page import CheckOutPage_1
 from Pages.CheckOut2.CheckOut2Page import CheckOutPage_2
 from Pages.CheckOutFinish.CheckOutFinishPage import CheckOutPage_Finish
 
-web_driver = None
+# nie wiem po co to jest tutaj i czemu global i tym bardziej None, moze to byc lokalnie w tym init_driver
 
 
 @pytest.fixture(params=["chrome"], scope='class')
 def init_driver(request):
-    global web_driver
     options = webdriver.ChromeOptions()
     options.headless = False
     if request.param == "chrome":
@@ -26,6 +25,7 @@ def init_driver(request):
         web_driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     web_driver.delete_all_cookies()
     request.cls.driver = web_driver
+    # te wszystkie inicjalizacje pagy, nie powinny byc tutaj, tylko kiedy potrzeba w trakcie testow
     request.cls.loginPage = LoginPage(web_driver)
     request.cls.inventoryPage = InventoryPage(web_driver)
     request.cls.itemPage = ItemPage(web_driver)

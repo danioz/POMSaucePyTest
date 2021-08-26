@@ -3,6 +3,9 @@ import allure
 import Config.config
 from Tests.test_base import BaseTest
 
+# pytest ma jedna z zalet, ze nie trzeba testow pisac w klasach, wystarcza metody w plikach
+# allure jest bardzo uzywany, moze jest jakis plugin do pytest, w behave to description itp. sa automatycznie wpisywane do allure
+
 @allure.suite('Test Cart')
 @allure.sub_suite('Test Cart')
 class Test_Cart(BaseTest):
@@ -24,6 +27,8 @@ class Test_Cart(BaseTest):
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Continue shopping')
     @allure.description('Adding item to the cart, then remove it from the cart. Continue shopping and add item to the cart')
+    # w rzeczywistosci jest to troche za dlugi test(albo step testu) 
+    # normalnie jest jakis step i weryfikacja/weryfikacje, ale to tak z punktu widzenia testowania
     def test_continue_shopping(self):
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'

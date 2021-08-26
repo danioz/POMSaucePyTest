@@ -1,6 +1,9 @@
 import allure
 
 from Pages.BasePage import BasePage
+# ja raczej nie rozczlonkowuje na oddzielne pliki dla elements
+# jezeli klasy nie sa duze, lepiej to trzymac w tym samym miejscu na gorze klasy. latwiejszy maintenance
+# mozna by sie pozbyc katalogow i zbednych importow. Ta struktura to moze dla duzo wiekszych projektow.
 from Pages.CheckOut1.elements import Elements
 
 class CheckOutPage_1(BasePage):
