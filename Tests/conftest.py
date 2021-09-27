@@ -14,7 +14,7 @@ web_driver = None
 def init_driver(request):
     global web_driver
     options = webdriver.ChromeOptions()
-    options.headless = False
+    options.headless = True
     if request.param == "chrome":
         web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     if request.param == "firefox":
