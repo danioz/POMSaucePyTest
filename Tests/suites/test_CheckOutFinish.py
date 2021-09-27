@@ -17,6 +17,8 @@ class Test_CheckOut_Finish(BaseTest):
     @allure.title('Checking finalizing checkout procedure')
     @allure.description('Going to the checkout, verifying price and finalizing checkout procedure')
     def test_finish_checkout(self):
+
+
         self.inventoryPage.add_to_cart()
         assert self.inventoryPage.check_cart() == '1'
         self.inventoryPage.enter_cart()
