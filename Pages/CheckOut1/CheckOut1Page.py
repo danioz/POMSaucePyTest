@@ -16,7 +16,7 @@ class CheckOutPage_1(BasePage):
     @allure.step("Getting inputs: '{1}' from the Checkout1 page")
     def get_inputs(self, name):
         list = []
-        inputs = self.get_elements(Elements.INPUTS_PAGE)
+        inputs = self.get_all_elements(Elements.INPUTS_PAGE)
         for input in inputs:
             attribute = self.get_element_attribute(input, name)
             list.append(attribute)

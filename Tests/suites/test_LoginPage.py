@@ -18,7 +18,7 @@ class Test_Smoke(BaseLoginTest):
     def test_inputs_on_the_page(self, expected_inputs):
         self.loginPage = LoginPage(self.driver)
 
-        assert self.loginPage.check_url() == self.expected_url
+        assert self.loginPage.get_actual_url() == self.expected_url
         current_inputs = self.loginPage.get_inputs()
         assert current_inputs == expected_inputs
 
@@ -38,7 +38,7 @@ class Test_Login(BaseLoginTest):
         self.loginPage.click_login()
 
         assert self.inventoryPage.get_title() == 'PRODUCTS'
-        assert self.inventoryPage.check_url() == self.expected_inventory_url
+        assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying locked-out user login procedure')
@@ -103,9 +103,9 @@ class Test_Login(BaseLoginTest):
     @allure.description('Open login page, provide incorrect credentials and confirming getting error messages')
     @pytest.mark.parametrize("username, password, error_message",
                              [['locked_out_user', 'secret_sauce', 'Epic sadface: Sorry, this user has been locked out.'],
-                              ['standard_user', '', 'Epic sadface: Password is required'],
-                              ['', 'secret_sauce', 'Epic sadface: Username is required'],
-                              ['username', 'password', 'Epic sadface: Username and password do not match any user in this service']
+                              # ['standard_user', '', 'Epic sadface: Password is required'],
+                              # ['', 'secret_sauce', 'Epic sadface: Username is required'],
+                              # ['username', 'password', 'Epic sadface: Username and password do not match any user in this service']
                               ])
     def test_failed_login_scenario(self, username, password, error_message):
         self.loginPage = LoginPage(self.driver)

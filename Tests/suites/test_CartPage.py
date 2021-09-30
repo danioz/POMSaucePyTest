@@ -23,7 +23,7 @@ class Test_Cart(BaseTest):
 
         self.inventoryPage.enter_cart()
 
-        assert self.cartPage.check_url() == self.expected_cart_url
+        assert self.cartPage.get_actual_url() == self.expected_cart_url
         assert self.cartPage.get_title() == 'YOUR CART'
         assert self.cartPage.get_desc_label_cart() == 'DESCRIPTION'
         assert self.cartPage.get_qty_label_cart() == 'QTY'
@@ -55,7 +55,7 @@ class Test_Cart(BaseTest):
         self.inventoryPage.add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
-        assert self.inventoryPage.check_url() == self.expected_inventory_url
+        assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Going to the checkout page')
@@ -71,4 +71,4 @@ class Test_Cart(BaseTest):
         assert self.cartPage.get_qty_cart() == '1'
         assert self.cartPage.get_item_price() == '$29.99'
         self.cartPage.checkout()
-        assert self.checkout1Page.check_url() == self.expected_checkout1_url
+        assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url

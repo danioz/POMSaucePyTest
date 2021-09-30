@@ -30,7 +30,7 @@ class Test_Item(BaseTest):
 
         self.inventoryPage.add_item_link(item)
 
-        assert self.expected_item_url in self.itemPage.check_url()
+        assert self.expected_item_url in self.itemPage.get_actual_url()
 
         self.itemPage.add_to_cart()
 
@@ -52,7 +52,7 @@ class Test_Item(BaseTest):
 
         self.inventoryPage.add_item_link(item)
 
-        assert self.expected_item_url in self.itemPage.check_url()
+        assert self.expected_item_url in self.itemPage.get_actual_url()
 
         self.itemPage.add_to_cart()
 
@@ -78,11 +78,11 @@ class Test_Item(BaseTest):
 
         self.inventoryPage.add_item_link(item)
 
-        assert self.expected_item_url in self.itemPage.check_url()
+        assert self.expected_item_url in self.itemPage.get_actual_url()
 
         self.itemPage.back_to_products()
 
-        assert self.inventoryPage.check_url() == self.expected_inventory_url
+        assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Checking item elements')
@@ -104,7 +104,7 @@ class Test_Item(BaseTest):
 
         self.inventoryPage.add_item_link(item)
 
-        assert self.expected_item_url in self.itemPage.check_url()
+        assert self.expected_item_url in self.itemPage.get_actual_url()
         assert self.itemPage.get_item_name() == name
         assert self.itemPage.get_item_description() == desc
         assert self.itemPage.get_item_price() == price

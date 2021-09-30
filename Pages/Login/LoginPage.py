@@ -34,7 +34,7 @@ class LoginPage(BasePage):
     @allure.step("Getting all inputs from the Login page")
     def get_inputs(self):
         list = []
-        inputs = self.get_elements(Elements.INPUTS_PAGE)
+        inputs = self.get_all_elements(Elements.INPUTS_PAGE)
         for input in inputs:
             attribute = self.get_element_attribute(input)
             list.append(attribute)

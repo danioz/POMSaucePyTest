@@ -27,18 +27,18 @@ class Test_CheckOut_2(BaseTest):
 
         self.inventoryPage.enter_cart()
 
-        assert self.cartPage.check_url() == self.expected_cart_url
+        assert self.cartPage.get_actual_url() == self.expected_cart_url
 
         self.cartPage.checkout()
 
-        assert self.checkout1Page.check_url() == self.expected_checkout1_url
+        assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
         self.checkout1Page.input_first_name('Daniel')
         self.checkout1Page.input_last_name('Zet')
         self.checkout1Page.input_postal_code('99-100')
         self.checkout1Page.continue_checkout()
 
-        assert self.checkout2Page.check_url() == self.expected_checkout2_url
+        assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
         assert self.checkout2Page.get_title() == 'CHECKOUT: OVERVIEW'
         assert self.checkout2Page.get_desc_label_cart() == 'DESCRIPTION'
         assert self.checkout2Page.get_qty_label_cart() == 'QTY'
@@ -58,18 +58,18 @@ class Test_CheckOut_2(BaseTest):
         self.inventoryPage.enter_cart()
         self.cartPage.checkout()
 
-        assert self.checkout1Page.check_url() == self.expected_checkout1_url
+        assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
         self.checkout1Page.input_first_name('Daniel')
         self.checkout1Page.input_last_name('Z')
         self.checkout1Page.input_postal_code('00-100')
         self.checkout1Page.continue_checkout()
 
-        assert self.checkout2Page.check_url() == self.expected_checkout2_url
+        assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
 
         self.checkout2Page.cancel_checkout()
 
-        assert self.inventoryPage.check_url() == self.expected_inventory_url
+        assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Checking checkout procedure')
@@ -89,14 +89,14 @@ class Test_CheckOut_2(BaseTest):
         price = self.cartPage.get_item_price()
         self.cartPage.checkout()
 
-        assert self.checkout1Page.check_url() == self.expected_checkout1_url
+        assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
         self.checkout1Page.input_first_name('Daniel')
         self.checkout1Page.input_last_name('Z')
         self.checkout1Page.input_postal_code('00-100')
         self.checkout1Page.continue_checkout()
 
-        assert self.checkout2Page.check_url() == self.expected_checkout2_url
+        assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
         assert self.checkout2Page.get_qty_cart() == qty
         assert self.checkout2Page.get_item_price() == price
         assert self.checkout2Page.get_subtotal() == f'Item total: {price}'
