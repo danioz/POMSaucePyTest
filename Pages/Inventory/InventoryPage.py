@@ -123,7 +123,7 @@ class InventoryPage(BasePage):
         item_list = []
         items = Elements.ADD_TO_CART
         self.wait_for_element(items)
-        elements = self.get_elements(items)
+        elements = self.get_all_elements(items)
         for element in elements:
             id = str(self.get_element_attribute(element)[23:])
             item_list.append(id)

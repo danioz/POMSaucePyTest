@@ -1,12 +1,12 @@
 class Test_Data:
 
     BASE_URL = "https://www.saucedemo.com/"
-    INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
-    ITEM_URL = "https://www.saucedemo.com/inventory-item.html?id"
-    CART_URL = "https://www.saucedemo.com/cart.html"
-    CHECKOUT1_URL = "https://www.saucedemo.com/checkout-step-one.html"
-    CHECKOUT2_URL = "https://www.saucedemo.com/checkout-step-two.html"
-    CHECKOUT_FINISH_URL = "https://www.saucedemo.com/checkout-complete.html"
+    INVENTORY_URL = f"{BASE_URL}inventory.html"
+    ITEM_URL = f"{BASE_URL}inventory-item.html?id"
+    CART_URL = f"{BASE_URL}cart.html"
+    CHECKOUT1_URL = f"{BASE_URL}checkout-step-one.html"
+    CHECKOUT2_URL = f"{BASE_URL}checkout-step-two.html"
+    CHECKOUT_FINISH_URL = f"{BASE_URL}checkout-complete.html"
 
     STANDARD_USER_NAME = "standard_user"
     LOCKED_OUT_USER = "locked_out_user"
