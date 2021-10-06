@@ -21,7 +21,8 @@ class Test_Cart(BaseTest):
         self.inventoryPage = InventoryPage(self.driver)
         self.cartPage = CartPage(self.driver)
 
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
 
         assert self.cartPage.get_actual_url() == self.expected_cart_url
         assert self.cartPage.get_title() == 'YOUR CART'
@@ -35,24 +36,29 @@ class Test_Cart(BaseTest):
         self.inventoryPage = InventoryPage(self.driver)
         self.cartPage = CartPage(self.driver)
 
-        self.inventoryPage.add_to_cart()
+        self.inventoryPage\
+            .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
 
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
 
         assert self.cartPage.get_qty_cart() == '1'
         assert self.cartPage.get_item_price() == '$29.99'
 
-        self.cartPage.remove_from_cart()
+        self.cartPage\
+            .remove_from_cart()
         status = self.cartPage.empty_cart()
 
         assert True == status
         status_2 = self.inventoryPage.empty_cart()
         assert True == status_2
 
-        self.cartPage.continue_shopping()
-        self.inventoryPage.add_to_cart()
+        self.cartPage\
+            .continue_shopping()
+        self.inventoryPage\
+            .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
@@ -65,10 +71,13 @@ class Test_Cart(BaseTest):
         self.cartPage = CartPage(self.driver)
         self.checkout1Page = CheckOutPage_1(self.driver)
 
-        self.inventoryPage.add_to_cart()
+        self.inventoryPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == '1'
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
         assert self.cartPage.get_qty_cart() == '1'
         assert self.cartPage.get_item_price() == '$29.99'
-        self.cartPage.checkout()
+        self.cartPage\
+            .checkout()
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url

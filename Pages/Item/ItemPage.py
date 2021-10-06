@@ -12,10 +12,12 @@ class ItemPage(BasePage):
     @allure.step("Adding item to the cart")
     def add_to_cart(self):
         self.do_click(Elements.BTN_ADD_TO_CART)
+        return self
 
     @allure.step("Removing item from the cart")
     def remove_from_cart(self):
         self.do_click(Elements.BTN_REMOVE)
+        return self
 
     @allure.step("Getting back to the products")
     def back_to_products(self):

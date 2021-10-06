@@ -18,54 +18,67 @@ class InventoryPage(BasePage):
     @allure.step("Entering cart")
     def enter_cart(self):
         self.do_click(Elements.CART)
+        return self
 
     @allure.step("Adding Sauce Labs Backpack")
     def add_backpack(self):
         self.do_click(Elements.ADD_BACKPACK)
+        return self
 
     @allure.step("Adding Sauce Labs Bike Light")
     def add_bike_light(self):
         self.do_click(Elements.ADD_BIKE_LIGHT)
+        return self
 
     @allure.step("Adding Sauce Labs Bolt T-Shirt")
     def add_t_shirt(self):
         self.do_click(Elements.ADD_T_SHIRT)
+        return self
 
     @allure.step("Adding Sauce Labs Fleece Jacket")
     def add_jacket(self):
         self.do_click(Elements.ADD_JACKET)
+        return self
 
     @allure.step("Adding Sauce Labs Onesie")
     def add_onesie(self):
         self.do_click(Elements.ADD_ONESIE)
+        return self
 
     @allure.step("Adding Test.allTheThings() T-Shirt (Red)")
     def add_red_t_shirt(self):
         self.do_click(Elements.ADD_RED_T_SHIRT)
+        return self
 
     @allure.step("Removing Sauce Labs Backpack")
     def remove_backpack(self):
         self.do_click(Elements.REMOVE_BACKPACK)
+        return self
 
     @allure.step("Removing Sauce Labs Bike Light")
     def remove_bike_light(self):
         self.do_click(Elements.REMOVE_BIKE_LIGHT)
+        return self
 
     @allure.step("Removing Sauce Labs Bolt T-Shirt")
     def remove_t_shirt(self):
         self.do_click(Elements.REMOVE_T_SHIRT)
+        return self
 
     @allure.step("Removing Sauce Labs Fleece Jacket")
     def remove_jacket(self):
         self.do_click(Elements.REMOVE_JACKET)
+        return self
 
     @allure.step("Removing Sauce Labs Onesie")
     def remove_onesie(self):
         self.do_click(Elements.ADD_ONESIE)
+        return self
 
     @allure.step("Removing Test.allTheThings() T-Shirt (Red)")
     def remove_red_t_shirt(self):
         self.do_click(Elements.REMOVE_RED_T_SHIRT)
+        return self
 
     @allure.step("Adding item with link")
     def add_item_link(self, item):
@@ -95,10 +108,12 @@ class InventoryPage(BasePage):
     @allure.step("Adding item to the cart")
     def add_to_cart(self):
         self.do_click(Elements.ADD_TO_CART)
+        return self
 
     @allure.step("Removing item from the cart")
     def remove_from_cart(self):
         self.do_click(Elements.REMOVE_FROM_CART)
+        return self
 
     @allure.step("Verification of the empty cart")
     def empty_cart(self):
@@ -112,11 +127,13 @@ class InventoryPage(BasePage):
     def add_item_to_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]")
         self.do_click(element)
+        return self
 
     @allure.step("Removing '{1}' from the cart")
     def remove_item_from_cart(self, item):
         element = (By.XPATH, f"//button[contains(@id,'remove') and contains(@id,'{item}')]")
         self.do_click(element)
+        return self
 
     @allure.step("Returning list of available items")
     def list_of_available_item(self):

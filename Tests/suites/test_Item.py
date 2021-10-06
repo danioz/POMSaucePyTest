@@ -28,11 +28,13 @@ class Test_Item(BaseTest):
         self.inventoryPage = InventoryPage(self.driver)
         self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
+        self.inventoryPage\
+            .add_item_link(item)
 
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.add_to_cart()
+        self.itemPage\
+            .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
 
@@ -50,15 +52,18 @@ class Test_Item(BaseTest):
         self.inventoryPage = InventoryPage(self.driver)
         self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
+        self.inventoryPage\
+            .add_item_link(item)
 
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.add_to_cart()
+        self.itemPage\
+            .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
 
-        self.itemPage.remove_from_cart()
+        self.itemPage\
+            .remove_from_cart()
 
         assert True == self.inventoryPage.empty_cart()
 
@@ -76,11 +81,13 @@ class Test_Item(BaseTest):
         self.inventoryPage = InventoryPage(self.driver)
         self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
+        self.inventoryPage\
+            .add_item_link(item)
 
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.back_to_products()
+        self.itemPage\
+            .back_to_products()
 
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
@@ -102,7 +109,8 @@ class Test_Item(BaseTest):
         desc = self.inventoryPage.get_item_description(item)
         price = self.inventoryPage.get_item_price(item)
 
-        self.inventoryPage.add_item_link(item)
+        self.inventoryPage\
+            .add_item_link(item)
 
         assert self.expected_item_url in self.itemPage.get_actual_url()
         assert self.itemPage.get_item_name() == name

@@ -33,9 +33,10 @@ class Test_Login(BaseLoginTest):
     def test_login(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username(Test_Data.STANDARD_USER_NAME)
-        self.loginPage.input_password(Test_Data.PASSWORD)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username(Test_Data.STANDARD_USER_NAME)\
+            .input_password(Test_Data.PASSWORD)\
+            .click_login()
 
         assert self.inventoryPage.get_title() == 'PRODUCTS'
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
@@ -46,9 +47,10 @@ class Test_Login(BaseLoginTest):
     def test_locked_user(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username(Test_Data.LOCKED_OUT_USER)
-        self.loginPage.input_password(Test_Data.PASSWORD)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username(Test_Data.LOCKED_OUT_USER)\
+            .input_password(Test_Data.PASSWORD)\
+            .click_login()
 
         assert self.loginPage.get_error_message() == "Epic sadface: Sorry, this user has been locked out."
 
@@ -58,8 +60,9 @@ class Test_Login(BaseLoginTest):
     def test_no_password(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username(Test_Data.STANDARD_USER_NAME)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username(Test_Data.STANDARD_USER_NAME)\
+            .click_login()
 
         assert self.loginPage.get_error_message() == "Epic sadface: Password is required"
 
@@ -69,8 +72,9 @@ class Test_Login(BaseLoginTest):
     def test_no_username(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_password(Test_Data.PASSWORD)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_password(Test_Data.PASSWORD)\
+            .click_login()
 
         assert self.loginPage.get_error_message() == "Epic sadface: Username is required"
 
@@ -80,9 +84,10 @@ class Test_Login(BaseLoginTest):
     def test_not_match_user(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username('admin')
-        self.loginPage.input_password('password')
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username('admin')\
+            .input_password('password')\
+            .click_login()
 
         assert self.loginPage.get_error_message() == "Epic sadface: Username and password do not match any user in this service"
 
@@ -92,9 +97,10 @@ class Test_Login(BaseLoginTest):
     def test_problem_user(self):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username(Test_Data.PROBLEM_USER)
-        self.loginPage.input_password(Test_Data.PASSWORD)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username(Test_Data.PROBLEM_USER)\
+            .input_password(Test_Data.PASSWORD)\
+            .click_login()
 
         assert self.inventoryPage.get_title() == 'PRODUCTS'
 
@@ -103,15 +109,16 @@ class Test_Login(BaseLoginTest):
     @allure.description('Open login page, provide incorrect credentials and confirming getting error messages')
     @pytest.mark.parametrize("username, password, error_message",
                              [['locked_out_user', 'secret_sauce', 'Epic sadface: Sorry, this user has been locked out.'],
-                              # ['standard_user', '', 'Epic sadface: Password is required'],
-                              # ['', 'secret_sauce', 'Epic sadface: Username is required'],
-                              # ['username', 'password', 'Epic sadface: Username and password do not match any user in this service']
+                              ['standard_user', '', 'Epic sadface: Password is required'],
+                              ['', 'secret_sauce', 'Epic sadface: Username is required'],
+                              ['username', 'password', 'Epic sadface: Username and password do not match any user in this service']
                               ])
     def test_failed_login_scenario(self, username, password, error_message):
         self.loginPage = LoginPage(self.driver)
 
-        self.loginPage.input_username(username)
-        self.loginPage.input_password(password)
-        self.loginPage.click_login()
+        self.loginPage\
+            .input_username(username)\
+            .input_password(password)\
+            .click_login()
 
         assert self.loginPage.get_error_message() == error_message

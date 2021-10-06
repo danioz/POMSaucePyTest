@@ -32,6 +32,7 @@ class CartPage(BasePage):
     @allure.step("Removing item from the cart")
     def remove_from_cart(self):
         self.do_click(Elements.BTN_REMOVE_FROM_CART)
+        return self
 
     @allure.step("Verification of the empty cart")
     def empty_cart(self):

@@ -25,26 +25,32 @@ class CheckOutPage_1(BasePage):
     @allure.step("Providing '{1}'")
     def input_first_name(self, first_name):
         self.do_send_keys(Elements.INPUT_FIRST_NAME, first_name)
+        return self
 
     @allure.step("Providing last '{1}'")
     def input_last_name(self, last_name):
         self.do_send_keys(Elements.INPUT_LAST_NAME, last_name)
+        return self
 
     @allure.step("Providing postal code - '{1}'")
     def input_postal_code(self, postal_code):
         self.do_send_keys(Elements.INPUT_POSTAL_CODE, postal_code)
+        return self
 
     @allure.step("Clearing first name")
     def clear_first_name(self):
         self.do_clear_text(Elements.INPUT_FIRST_NAME)
+        return self
 
     @allure.step("Clearing last name")
     def clear_last_name(self):
         self.do_clear_text(Elements.INPUT_LAST_NAME)
+        return self
 
     @allure.step("Clearing postal code")
     def clear_postal_code(self):
         self.do_clear_text(Elements.INPUT_POSTAL_CODE)
+        return self
 
     @allure.step("Getting error message")
     def get_error_message(self):

@@ -18,14 +18,17 @@ class LoginPage(BasePage):
     @allure.step("Providing username: '{1}'")
     def input_username(self, username):
         self.do_send_keys(Elements.INPUT_USERNAME, username)
+        return self
 
     @allure.step("Providing password: '{1}'")
     def input_password(self, password):
         self.do_send_keys(Elements.INPUT_PASSWORD, password)
+        return self
 
     @allure.step("Clicking login button")
     def click_login(self):
         self.do_click(Elements.BTN_LOGIN)
+        return self
 
     @allure.step("Getting error message")
     def get_error_message(self):
@@ -42,8 +45,9 @@ class LoginPage(BasePage):
 
     @allure.step("Logging with the provided username: '{1}' and password: '{2}'")
     def do_login(self, username, password):
-        self.input_username(username)
-        self.input_password(password)
-        self.click_login()
+        self.input_username(username)\
+            .input_password(password)\
+            .click_login()
         from Pages.Inventory.InventoryPage import InventoryPage
         return InventoryPage(self.driver)
+

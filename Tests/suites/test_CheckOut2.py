@@ -25,18 +25,21 @@ class Test_CheckOut_2(BaseTest):
         self.checkout1Page = CheckOutPage_1(self.driver)
         self.checkout2Page = CheckOutPage_2(self.driver)
 
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
 
         assert self.cartPage.get_actual_url() == self.expected_cart_url
 
-        self.cartPage.checkout()
+        self.cartPage\
+            .checkout()
 
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
-        self.checkout1Page.input_first_name('Daniel')
-        self.checkout1Page.input_last_name('Zet')
-        self.checkout1Page.input_postal_code('99-100')
-        self.checkout1Page.continue_checkout()
+        self.checkout1Page\
+            .input_first_name('Daniel')\
+            .input_last_name('Zet')\
+            .input_postal_code('99-100')\
+            .continue_checkout()
 
         assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
         assert self.checkout2Page.get_title() == 'CHECKOUT: OVERVIEW'
@@ -55,19 +58,23 @@ class Test_CheckOut_2(BaseTest):
         self.checkout1Page = CheckOutPage_1(self.driver)
         self.checkout2Page = CheckOutPage_2(self.driver)
 
-        self.inventoryPage.enter_cart()
-        self.cartPage.checkout()
+        self.inventoryPage\
+            .enter_cart()
+        self.cartPage\
+            .checkout()
 
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
-        self.checkout1Page.input_first_name('Daniel')
-        self.checkout1Page.input_last_name('Z')
-        self.checkout1Page.input_postal_code('00-100')
-        self.checkout1Page.continue_checkout()
+        self.checkout1Page\
+            .input_first_name('Daniel')\
+            .input_last_name('Z')\
+            .input_postal_code('00-100')\
+            .continue_checkout()
 
         assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
 
-        self.checkout2Page.cancel_checkout()
+        self.checkout2Page\
+            .cancel_checkout()
 
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
@@ -80,21 +87,25 @@ class Test_CheckOut_2(BaseTest):
         self.checkout1Page = CheckOutPage_1(self.driver)
         self.checkout2Page = CheckOutPage_2(self.driver)
 
-        self.inventoryPage.add_to_cart()
+        self.inventoryPage\
+            .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
 
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
         qty = self.cartPage.get_qty_cart()
         price = self.cartPage.get_item_price()
-        self.cartPage.checkout()
+        self.cartPage\
+            .checkout()
 
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
-        self.checkout1Page.input_first_name('Daniel')
-        self.checkout1Page.input_last_name('Z')
-        self.checkout1Page.input_postal_code('00-100')
-        self.checkout1Page.continue_checkout()
+        self.checkout1Page\
+            .input_first_name('Daniel')\
+            .input_last_name('Z')\
+            .input_postal_code('00-100')\
+            .continue_checkout()
 
         assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
         assert self.checkout2Page.get_qty_cart() == qty
