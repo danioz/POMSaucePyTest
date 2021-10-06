@@ -56,11 +56,11 @@ class BasePage:
 
     def get_element(self, by_locator, timeout=10):
         self.wait_for_element(by_locator, timeout)
-        return self.driver.find_element(by_locator[0], by_locator[1])
+        return self.driver.find_element(*by_locator)
 
     def get_all_elements(self, by_locator, timeout=10):
         self.wait_for_element(by_locator, timeout)
-        return self.driver.find_elements(by_locator[0], by_locator[1])
+        return self.driver.find_elements(*by_locator)
 
     def do_send_keys(self, by_locator, text):
         try:
