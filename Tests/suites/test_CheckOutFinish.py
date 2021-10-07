@@ -8,6 +8,7 @@ from Pages.CheckOutFinish.CheckOutFinishPage import CheckOutPage_Finish
 from Pages.Inventory.InventoryPage import InventoryPage
 from Tests.test_base import BaseTest
 
+
 @allure.suite('Test Checkout Finish')
 @allure.sub_suite('Test Checkout Finish')
 class Test_CheckOut_Finish(BaseTest):
@@ -28,24 +29,24 @@ class Test_CheckOut_Finish(BaseTest):
         self.checkout2Page = CheckOutPage_2(self.driver)
         self.checkoutFinish = CheckOutPage_Finish(self.driver)
 
-        self.inventoryPage\
+        self.inventoryPage \
             .add_to_cart()
 
         assert self.inventoryPage.check_cart() == '1'
 
-        self.inventoryPage\
+        self.inventoryPage \
             .enter_cart()
         qty = self.cartPage.get_qty_cart()
         price = self.cartPage.get_item_price()
-        self.cartPage\
+        self.cartPage \
             .checkout()
 
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url
 
-        self.checkout1Page\
-            .input_first_name('Daniel')\
-            .input_last_name('Z')\
-            .input_postal_code('00-100')\
+        self.checkout1Page \
+            .input_first_name('Daniel') \
+            .input_last_name('Z') \
+            .input_postal_code('00-100') \
             .continue_checkout()
 
         assert self.checkout2Page.get_actual_url() == self.expected_checkout2_url
@@ -55,7 +56,7 @@ class Test_CheckOut_Finish(BaseTest):
         assert self.checkout2Page.get_tax() == 'Tax: $2.40'
         assert self.checkout2Page.get_total_price() == 'Total: $32.39'
 
-        self.checkout2Page\
+        self.checkout2Page \
             .finish_checkout()
 
         assert self.checkoutFinish.get_actual_url() == self.expected_checkout_finish_url
@@ -67,7 +68,7 @@ class Test_CheckOut_Finish(BaseTest):
 
         assert True == status
 
-        self.checkoutFinish\
+        self.checkoutFinish \
             .go_back_home()
 
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
