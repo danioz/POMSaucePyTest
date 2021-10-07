@@ -11,6 +11,7 @@ from Config.config import Test_Data
 @allure.sub_suite('Smoke tests')
 class Test_Smoke(BaseLoginTest):
     expected_url = Config.config.Test_Data.BASE_URL
+    expected_title = 'PRODUCTS'
 
     @allure.severity(allure.severity_level.BLOCKER)
     @allure.title('Verifying login inputs')
@@ -19,30 +20,31 @@ class Test_Smoke(BaseLoginTest):
     def test_inputs_on_the_page(self, expected_inputs):
         self.loginPage = LoginPage(self.driver)
 
-        assert self.expected_url == self.loginPage \
-            .get_actual_url()
-        assert expected_inputs == self.loginPage.get_inputs()
+        self.loginPage \
+            .ASSERT_actual_url(self.expected_url) \
+            .ASSERT_page_inputs(expected_inputs)
 
 
 @allure.suite('Login Test')
 @allure.sub_suite('Login Test')
 class Test_Login(BaseLoginTest):
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
+    expected_title = 'PRODUCTS'
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying correct user login procedure')
     @allure.description('Open login page, provide correct login inputs and confirming correct login')
     def test_login(self):
         self.loginPage = LoginPage(self.driver)
-        expected_title = 'PRODUCTS'
 
-        assert self.expected_inventory_url == self.loginPage \
+        self.loginPage \
             .input_username(Test_Data.STANDARD_USER_NAME) \
             .input_password(Test_Data.PASSWORD) \
             .click_login() \
-            .get_actual_url()
+            .ASSERT_actual_url(self.expected_inventory_url)
 
-        assert self.inventoryPage.get_title() == expected_title
+        self.inventoryPage \
+            .ASSERT_actual_title(self.expected_title)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying locked-out user login procedure')
@@ -51,11 +53,11 @@ class Test_Login(BaseLoginTest):
         self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Sorry, this user has been locked out."
 
-        assert error_message == self.loginPage \
+        self.loginPage \
             .input_username(Test_Data.LOCKED_OUT_USER) \
             .input_password(Test_Data.PASSWORD) \
             .click_login() \
-            .get_error_message()
+            .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying no password login procedure')
@@ -64,10 +66,10 @@ class Test_Login(BaseLoginTest):
         self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Password is required"
 
-        assert error_message == self.loginPage \
+        self.loginPage \
             .input_username(Test_Data.STANDARD_USER_NAME) \
             .click_login() \
-            .get_error_message()
+            .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying no username login procedure')
@@ -76,10 +78,10 @@ class Test_Login(BaseLoginTest):
         self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Username is required"
 
-        assert error_message == self.loginPage \
+        self.loginPage \
             .input_password(Test_Data.PASSWORD) \
             .click_login() \
-            .get_error_message()
+            .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying not correct login procedure')
@@ -88,25 +90,25 @@ class Test_Login(BaseLoginTest):
         self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Username and password do not match any user in this service"
 
-        assert error_message == self.loginPage \
+        self.loginPage \
             .input_username('admin') \
             .input_password('password') \
             .click_login() \
-            .get_error_message()
+            .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying problem user login procedure')
     @allure.description('Open login page, provide problem-user credentials and confirming login')
     def test_problem_user(self):
         self.loginPage = LoginPage(self.driver)
-        expected_title = 'PRODUCTS'
 
         self.loginPage \
             .input_username(Test_Data.PROBLEM_USER) \
             .input_password(Test_Data.PASSWORD) \
             .click_login()
 
-        assert self.inventoryPage.get_title() == expected_title
+        self.inventoryPage \
+            .ASSERT_actual_title(self.expected_title)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying getting error messages')
@@ -122,8 +124,8 @@ class Test_Login(BaseLoginTest):
     def test_failed_login_scenario(self, username, password, error_message):
         self.loginPage = LoginPage(self.driver)
 
-        assert error_message == self.loginPage \
+        self.loginPage \
             .input_username(username) \
             .input_password(password) \
             .click_login() \
-            .get_error_message()
+            .ASSERT_error_message(error_message)

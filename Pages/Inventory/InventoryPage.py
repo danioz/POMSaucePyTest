@@ -145,3 +145,23 @@ class InventoryPage(BasePage):
             id = str(self.get_element_attribute(element)[23:])
             item_list.append(id)
         return item_list
+
+    @allure.step("Validating actual url")
+    def ASSERT_actual_url(self, expected_url):
+        assert self.get_actual_url() == expected_url
+        return self
+
+    @allure.step("Validating title of the page")
+    def ASSERT_actual_title(self, expected_title):
+        assert self.get_title() == expected_title
+        return self
+
+    @allure.step("Validating cart")
+    def ASSERT_actual_cart(self, expected_item):
+        assert self.check_cart() == expected_item
+        return self
+
+    @allure.step("Validating empty cart")
+    def ASSERT_empty_cart(self):
+        assert True == self.empty_cart()
+        return self

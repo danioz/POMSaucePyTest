@@ -51,3 +51,17 @@ class LoginPage(BasePage):
         from Pages.Inventory.InventoryPage import InventoryPage
         return InventoryPage(self.driver)
 
+    @allure.step("Validating text of message error: '{1}'")
+    def ASSERT_error_message(self, error_message):
+        assert self.get_error_message() == error_message
+        return self
+
+    @allure.step("Validating actual url")
+    def ASSERT_actual_url(self, expected_url):
+        assert self.get_actual_url() == expected_url
+        return self
+
+    @allure.step("Validating page inputs'")
+    def ASSERT_page_inputs(self, expected_inputs):
+        assert self.get_inputs() == expected_inputs
+        return self
