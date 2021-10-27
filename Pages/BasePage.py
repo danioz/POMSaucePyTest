@@ -68,9 +68,9 @@ class BasePage:
             element.send_keys(text)
             self.log.info(f"An input '{text}' typed into: {by_locator}")
         except:
-            self.log.error(f"An exception occured while typing an input into: {by_locator}")
+            self.log.error(f"An exception occurred while typing an input into: {by_locator}")
             self.screenshot_allure()
-            raise AssertionError(f"An exception occured while typing an input into: {by_locator}")
+            raise AssertionError(f"An exception occurred while typing an input into: {by_locator}")
 
     def do_clear_text(self, by_locator):
         element = self.get_element(by_locator)
