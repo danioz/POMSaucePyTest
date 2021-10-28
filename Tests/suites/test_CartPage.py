@@ -25,6 +25,7 @@ class Test_Cart(BaseTest):
         self.inventoryPage \
             .enter_cart()
 
+        # todo: validator
         assert self.cartPage.get_actual_url() == self.expected_cart_url
         assert self.cartPage.get_title() == 'YOUR CART'
         assert self.cartPage.get_desc_label_cart() == 'DESCRIPTION'

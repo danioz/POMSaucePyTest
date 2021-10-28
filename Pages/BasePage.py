@@ -127,3 +127,12 @@ class BasePage:
             self.driver.execute_script("window.scrollBy(0, -1000);")
         if direction == "down":
             self.driver.execute_script("window.scrollBy(0, 1000);")
+
+    def then(self):
+        return self
+
+    def given(self):
+        return self
+
+    def also(self):
+        return self

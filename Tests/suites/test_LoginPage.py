@@ -2,6 +2,7 @@ import pytest
 import allure
 
 import Config.config
+from Pages.Inventory.InventoryPage import InventoryPage
 from Pages.Login.LoginPage import LoginPage
 from Tests.test_base_login import BaseLoginTest
 from Config.config import Test_Data
@@ -57,6 +58,7 @@ class Test_Login(BaseLoginTest):
             .input_username(Test_Data.LOCKED_OUT_USER) \
             .input_password(Test_Data.PASSWORD) \
             .click_login() \
+            .then() \
             .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -69,6 +71,7 @@ class Test_Login(BaseLoginTest):
         self.loginPage \
             .input_username(Test_Data.STANDARD_USER_NAME) \
             .click_login() \
+            .then() \
             .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -81,6 +84,7 @@ class Test_Login(BaseLoginTest):
         self.loginPage \
             .input_password(Test_Data.PASSWORD) \
             .click_login() \
+            .then() \
             .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -94,6 +98,7 @@ class Test_Login(BaseLoginTest):
             .input_username('admin') \
             .input_password('password') \
             .click_login() \
+            .then() \
             .ASSERT_error_message(error_message)
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -105,7 +110,8 @@ class Test_Login(BaseLoginTest):
         self.loginPage \
             .input_username(Test_Data.PROBLEM_USER) \
             .input_password(Test_Data.PASSWORD) \
-            .click_login()
+            .click_login() \
+            .then()
 
         self.inventoryPage \
             .ASSERT_actual_title(self.expected_title)
@@ -123,9 +129,11 @@ class Test_Login(BaseLoginTest):
                               ])
     def test_failed_login_scenario(self, username, password, error_message):
         self.loginPage = LoginPage(self.driver)
+        self.inventoryPage = InventoryPage(self.driver)
 
         self.loginPage \
             .input_username(username) \
             .input_password(password) \
             .click_login() \
+            .then() \
             .ASSERT_error_message(error_message)
