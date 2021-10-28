@@ -18,6 +18,7 @@ def init_driver(request):
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-gpu")
     if request.param == "chrome":
         web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     if request.param == "firefox":
