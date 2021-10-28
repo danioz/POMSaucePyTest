@@ -12,20 +12,20 @@ from Pages.SideBar.SideBarPage import SideBarPage
 web_driver = None
 
 
-@pytest.fixture(params=["chrome"], scope='class')
+@pytest.fixture(params=["chrome", "firefox"], scope='class')
 def init_driver(request):
     global web_driver
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-gpu")
     if request.param == "chrome":
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-gpu")
         web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     if request.param == "firefox":
         from selenium.webdriver.firefox.options import Options
         options = Options()
         options.add_argument("--headless")
-        web_driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        web_driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
     if request.param == "edge":
         web_driver = webdriver.Edge(EdgeChromiumDriverManager().install())
     if request.param == "opera":

@@ -9,15 +9,10 @@ from Pages.SideBar.SideBarPage import SideBarPage
 @pytest.mark.usefixtures("init_driver")
 class BaseTest:
     def setup_method(self):
-        # self.loginPage = LoginPage(self.driver)
-        # self.inventoryPage = InventoryPage(self.driver)
-
+        self.driver.get(Test_Data.BASE_URL)
         self.loginPage.do_login(Test_Data.STANDARD_USER_NAME, Test_Data.PASSWORD)
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     def teardown_method(self):
-        # self.sideBarPage = SideBarPage(self.driver)
-        # self.loginPage = LoginPage(self.driver)
-
         self.sideBarPage.do_logout()
         assert self.loginPage.get_actual_url() == self.expected_url

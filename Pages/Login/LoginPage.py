@@ -9,7 +9,7 @@ class LoginPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver.get(Test_Data.BASE_URL)
+
 
     @allure.step("Getting title of the Login Page")
     def get_login_page_title(self):
