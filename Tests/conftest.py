@@ -12,7 +12,7 @@ from Pages.SideBar.SideBarPage import SideBarPage
 web_driver = None
 
 
-@pytest.fixture(params=["chrome", "firefox"], scope='class')
+@pytest.fixture(params=["chrome"], scope="class")
 def init_driver(request):
     global web_driver
     if request.param == "chrome":
@@ -23,9 +23,12 @@ def init_driver(request):
         web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     if request.param == "firefox":
         from selenium.webdriver.firefox.options import Options
+
         options = Options()
         options.add_argument("--headless")
-        web_driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+        web_driver = webdriver.Firefox(
+            executable_path=GeckoDriverManager().install(), options=options
+        )
     if request.param == "edge":
         web_driver = webdriver.Edge(EdgeChromiumDriverManager().install())
     if request.param == "opera":

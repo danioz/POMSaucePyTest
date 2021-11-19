@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 
 
 class InventoryPage(BasePage):
-
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -85,6 +84,7 @@ class InventoryPage(BasePage):
         link = (By.XPATH, f"//div[@class='inventory_item_name'][text()='{item}']")
         self.do_click(link)
         from Pages.Item.ItemPage import ItemPage
+
         return ItemPage(self.driver)
 
     @allure.step("Getting name of the item")
@@ -95,14 +95,18 @@ class InventoryPage(BasePage):
 
     @allure.step("Getting description of the item")
     def get_item_description(self, item):
-        link = (By.XPATH,
-                f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_desc'][1]")
+        link = (
+            By.XPATH,
+            f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_desc'][1]",
+        )
         return self.get_element_text(link)
 
     @allure.step("Getting price ot the item")
     def get_item_price(self, item):
-        link = (By.XPATH,
-                f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_price'][1]")
+        link = (
+            By.XPATH,
+            f"//div[@class='inventory_item_name'][text()='{item}']/following::div[@class='inventory_item_price'][1]",
+        )
         return self.get_element_text(link)
 
     @allure.step("Adding item to the cart")
@@ -125,13 +129,19 @@ class InventoryPage(BasePage):
 
     @allure.step("Adding '{1}' to the cart")
     def add_item_to_cart(self, item):
-        element = (By.XPATH, f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]")
+        element = (
+            By.XPATH,
+            f"//button[contains(@id,'add-to-cart') and contains(@id,'{item}')]",
+        )
         self.do_click(element)
         return self
 
     @allure.step("Removing '{1}' from the cart")
     def remove_item_from_cart(self, item):
-        element = (By.XPATH, f"//button[contains(@id,'remove') and contains(@id,'{item}')]")
+        element = (
+            By.XPATH,
+            f"//button[contains(@id,'remove') and contains(@id,'{item}')]",
+        )
         self.do_click(element)
         return self
 

@@ -18,8 +18,3 @@ class Test_Data:
     ERROR_IMG = "/static/media/sl-404.168b1cce.jpg"
 
     TITLE = "Swag Labs"
-
-
-
-
-

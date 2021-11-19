@@ -5,7 +5,6 @@ from Pages.Cart.elements import Elements
 
 
 class CartPage(BasePage):
-
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -42,10 +41,12 @@ class CartPage(BasePage):
     def checkout(self):
         self.do_click(Elements.BTN_CHECKOUT)
         from Pages.CheckOut1.CheckOut1Page import CheckOutPage_1
+
         return CheckOutPage_1(self.driver)
 
     @allure.step("Continue shopping")
     def continue_shopping(self):
         self.do_click(Elements.BTN_CONTINUE_SHOPPING)
         from Pages.Inventory.InventoryPage import InventoryPage
+
         return InventoryPage(self.driver)

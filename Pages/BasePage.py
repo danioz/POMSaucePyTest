@@ -18,7 +18,11 @@ class BasePage:
         self.driver = driver
 
     def screenshot_allure(self):
-        allure.attach(self.driver.get_screenshot_as_png(), name='FAIL', attachment_type=AttachmentType.PNG)
+        allure.attach(
+            self.driver.get_screenshot_as_png(),
+            name="FAIL",
+            attachment_type=AttachmentType.PNG,
+        )
 
     @allure.step("Getting url of the page")
     def get_actual_url(self):
@@ -26,16 +30,18 @@ class BasePage:
 
     def visible(self, by_locator, timeout=1):
         try:
-            WebDriverWait(self.driver, timeout, poll_frequency=0.5).\
-                until(EC.visibility_of_element_located(by_locator))
+            WebDriverWait(self.driver, timeout, poll_frequency=0.5).until(
+                EC.visibility_of_element_located(by_locator)
+            )
             return True
         except:
             return False
 
     def clickable(self, by_locator, timeout=1):
         try:
-            WebDriverWait(self.driver, timeout, poll_frequency=0.5). \
-                until(EC.element_to_be_clickable(by_locator))
+            WebDriverWait(self.driver, timeout, poll_frequency=0.5).until(
+                EC.element_to_be_clickable(by_locator)
+            )
             return True
         except:
             return False
@@ -44,15 +50,21 @@ class BasePage:
         if self.visible(by_locator, timeout):
             self.log.info(f"Element {by_locator} appeared on the page")
             return self
-        raise AssertionError(f"Element {by_locator} NOT appeared on the page in {timeout} seconds")
+        raise AssertionError(
+            f"Element {by_locator} NOT appeared on the page in {timeout} seconds"
+        )
 
     def wait_for_element_to_be_clickable(self, by_locator, timeout=10):
         if self.clickable(by_locator, timeout):
             self.log.info(f"Element {by_locator} clickable on the page")
             return self
         if self.visible(by_locator):
-            raise AssertionError(f"Element {by_locator} NOT click-able on the page in {timeout} seconds")
-        raise AssertionError(f"Element {by_locator} NOT appeared on the page in {timeout} seconds")
+            raise AssertionError(
+                f"Element {by_locator} NOT click-able on the page in {timeout} seconds"
+            )
+        raise AssertionError(
+            f"Element {by_locator} NOT appeared on the page in {timeout} seconds"
+        )
 
     def get_element(self, by_locator, timeout=10):
         self.wait_for_element(by_locator, timeout)
@@ -68,9 +80,13 @@ class BasePage:
             element.send_keys(text)
             self.log.info(f"An input '{text}' typed into: {by_locator}")
         except:
-            self.log.error(f"An exception occurred while typing an input into: {by_locator}")
+            self.log.error(
+                f"An exception occurred while typing an input into: {by_locator}"
+            )
             self.screenshot_allure()
-            raise AssertionError(f"An exception occurred while typing an input into: {by_locator}")
+            raise AssertionError(
+                f"An exception occurred while typing an input into: {by_locator}"
+            )
 
     def do_clear_text(self, by_locator):
         element = self.get_element(by_locator)
@@ -101,14 +117,15 @@ class BasePage:
             raise AssertionError(f"Failed to find TEXT on locator: {by_locator}")
         return text
 
-    def get_element_attribute(self, element, name='id'):
+    def get_element_attribute(self, element, name="id"):
         self.log.info(f"Attribute for attribute name: '{name}' was found")
         return element.get_attribute(name)
 
     def is_not_visible(self, by_locator, timeout=10):
         try:
-            WebDriverWait(self.driver, timeout, poll_frequency=0.5).\
-                until(EC.invisibility_of_element_located(by_locator))
+            WebDriverWait(self.driver, timeout, poll_frequency=0.5).until(
+                EC.invisibility_of_element_located(by_locator)
+            )
             self.log.info(f"Element {by_locator} disappeared from the page")
         except:
             self.log.error(f"Locator: {by_locator} did NOT disappear")

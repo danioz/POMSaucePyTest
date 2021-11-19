@@ -5,7 +5,6 @@ from Pages.CheckOutFinish.elements import Elements
 
 
 class CheckOutPage_Finish(BasePage):
-
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -25,4 +24,5 @@ class CheckOutPage_Finish(BasePage):
     def go_back_home(self):
         self.do_click(Elements.BTN_BACK_HOME)
         from Pages.Inventory.InventoryPage import InventoryPage
+
         return InventoryPage(self.driver)
