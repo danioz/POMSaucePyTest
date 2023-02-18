@@ -1,10 +1,5 @@
-import allure
 import pytest
 from Config.config import Test_Data
-from Pages.Inventory.InventoryPage import InventoryPage
-from Pages.Login.LoginPage import LoginPage
-from Pages.SideBar.SideBarPage import SideBarPage
-
 
 @pytest.mark.usefixtures("init_driver")
 class BaseTest:

@@ -19,7 +19,6 @@ class Test_Smoke(BaseLoginTest):
     @allure.description('Open login page and verifying all login inputs')
     @pytest.mark.parametrize("expected_inputs", [['user-name', 'password', 'login-button']])
     def test_inputs_on_the_page(self, expected_inputs):
-        self.loginPage = LoginPage(self.driver)
 
         self.loginPage \
             .ASSERT_actual_url(self.expected_url) \
@@ -36,7 +35,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying correct user login procedure')
     @allure.description('Open login page, provide correct login inputs and confirming correct login')
     def test_login(self):
-        self.loginPage = LoginPage(self.driver)
 
         self.loginPage \
             .input_username(Test_Data.STANDARD_USER_NAME) \
@@ -51,7 +49,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying locked-out user login procedure')
     @allure.description('Open login page, provide locked-out user login inputs and confirming getting error message')
     def test_locked_user(self):
-        self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Sorry, this user has been locked out."
 
         self.loginPage \
@@ -65,7 +62,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying no password login procedure')
     @allure.description('Open login page, provide only user login and confirming getting error message')
     def test_no_password(self):
-        self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Password is required"
 
         self.loginPage \
@@ -78,7 +74,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying no username login procedure')
     @allure.description('Open login page, provide only user password and confirming getting error message')
     def test_no_username(self):
-        self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Username is required"
 
         self.loginPage \
@@ -91,7 +86,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying not correct login procedure')
     @allure.description('Open login page, provide incorrect credentials and confirming getting error message')
     def test_not_match_user(self):
-        self.loginPage = LoginPage(self.driver)
         error_message = "Epic sadface: Username and password do not match any user in this service"
 
         self.loginPage \
@@ -105,7 +99,6 @@ class Test_Login(BaseLoginTest):
     @allure.title('Verifying problem user login procedure')
     @allure.description('Open login page, provide problem-user credentials and confirming login')
     def test_problem_user(self):
-        self.loginPage = LoginPage(self.driver)
 
         self.loginPage \
             .input_username(Test_Data.PROBLEM_USER) \
@@ -128,8 +121,6 @@ class Test_Login(BaseLoginTest):
                                'Epic sadface: Username and password do not match any user in this service']
                               ])
     def test_failed_login_scenario(self, username, password, error_message):
-        self.loginPage = LoginPage(self.driver)
-        self.inventoryPage = InventoryPage(self.driver)
 
         self.loginPage \
             .input_username(username) \

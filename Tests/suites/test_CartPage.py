@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 import Config.config
 from Pages.Cart.CartPage import CartPage
@@ -10,6 +11,14 @@ from Tests.test_base import BaseTest
 @allure.suite("Test Cart")
 @allure.sub_suite("Test Cart")
 class Test_Cart(BaseTest):
+
+    @pytest.fixture(autouse=True)
+    def class_setup(self, init_driver):
+        self.inventoryPage = InventoryPage(self.driver)
+        self.cartPage = CartPage(self.driver)
+        self.checkout1Page = CheckOutPage_1(self.driver)
+
+
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
     expected_cart_url = Config.config.Test_Data.CART_URL
@@ -19,10 +28,9 @@ class Test_Cart(BaseTest):
     @allure.title("Checking elements in Cart")
     @allure.description("Going to the cart and verifying elements")
     def test_go_to_cart(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
 
-        self.inventoryPage.enter_cart()
+        self.inventoryPage\
+            .enter_cart()
 
         # todo: validator
         assert self.cartPage.get_actual_url() == self.expected_cart_url
@@ -36,28 +44,27 @@ class Test_Cart(BaseTest):
         "Adding item to the cart, then remove it from the cart. Continue shopping and add item to the cart"
     )
     def test_continue_shopping(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
 
-        self.inventoryPage.add_to_cart()
-
+        self.inventoryPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == "1"
 
-        self.inventoryPage.enter_cart()
-
+        self.inventoryPage\
+            .enter_cart()
         assert self.cartPage.get_qty_cart() == "1"
         assert self.cartPage.get_item_price() == "$29.99"
 
-        self.cartPage.remove_from_cart()
+        self.cartPage\
+            .remove_from_cart()
         status = self.cartPage.empty_cart()
-
         assert True == status
         status_2 = self.inventoryPage.empty_cart()
         assert True == status_2
 
-        self.cartPage.continue_shopping()
-        self.inventoryPage.add_to_cart()
-
+        self.cartPage\
+            .continue_shopping()
+        self.inventoryPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == "1"
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
@@ -65,14 +72,16 @@ class Test_Cart(BaseTest):
     @allure.title("Going to the checkout page")
     @allure.description("Adding item to the cart and checkout")
     def test_checkout(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
-        self.checkout1Page = CheckOutPage_1(self.driver)
 
-        self.inventoryPage.add_to_cart()
+        self.inventoryPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == "1"
-        self.inventoryPage.enter_cart()
+
+        self.inventoryPage\
+            .enter_cart()
         assert self.cartPage.get_qty_cart() == "1"
         assert self.cartPage.get_item_price() == "$29.99"
-        self.cartPage.checkout()
+
+        self.cartPage\
+            .checkout()
         assert self.checkout1Page.get_actual_url() == self.expected_checkout1_url

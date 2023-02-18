@@ -4,12 +4,19 @@ import allure
 import Config.config
 from Pages.Inventory.InventoryPage import InventoryPage
 from Pages.Item.ItemPage import ItemPage
+from Pages.Login.LoginPage import LoginPage
 from Tests.test_base import BaseTest
 
 
 @allure.suite("Test Item")
 @allure.sub_suite("Test Item")
 class Test_Item(BaseTest):
+
+    @pytest.fixture(autouse=True)
+    def class_setup(self, init_driver):
+        self.inventoryPage = InventoryPage(self.driver)
+        self.itemPage = ItemPage(self.driver)
+
     expected_item_url = Config.config.Test_Data.ITEM_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
     expected_url = Config.config.Test_Data.BASE_URL
@@ -29,15 +36,13 @@ class Test_Item(BaseTest):
         ],
     )
     def test_add_to_cart(self, item):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
-
+        self.inventoryPage\
+            .add_item_link(item)
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.add_to_cart()
-
+        self.itemPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == "1"
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -55,19 +60,17 @@ class Test_Item(BaseTest):
         ],
     )
     def test_remove_from_cart(self, item):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
-
+        self.inventoryPage\
+            .add_item_link(item)
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.add_to_cart()
-
+        self.itemPage\
+            .add_to_cart()
         assert self.inventoryPage.check_cart() == "1"
 
-        self.itemPage.remove_from_cart()
-
+        self.itemPage\
+            .remove_from_cart()
         assert True == self.inventoryPage.empty_cart()
 
     @allure.severity(allure.severity_level.CRITICAL)
@@ -85,15 +88,13 @@ class Test_Item(BaseTest):
         ],
     )
     def test_back_to_products(self, item):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.itemPage = ItemPage(self.driver)
 
-        self.inventoryPage.add_item_link(item)
-
+        self.inventoryPage\
+            .add_item_link(item)
         assert self.expected_item_url in self.itemPage.get_actual_url()
 
-        self.itemPage.back_to_products()
-
+        self.itemPage\
+            .back_to_products()
         assert self.inventoryPage.get_actual_url() == self.expected_inventory_url
 
     @allure.severity(allure.severity_level.NORMAL)
@@ -113,14 +114,13 @@ class Test_Item(BaseTest):
         ],
     )
     def test_compare_item(self, item):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.itemPage = ItemPage(self.driver)
 
         name = self.inventoryPage.get_item_name(item)
         desc = self.inventoryPage.get_item_description(item)
         price = self.inventoryPage.get_item_price(item)
 
-        self.inventoryPage.add_item_link(item)
+        self.inventoryPage\
+            .add_item_link(item)
 
         assert self.expected_item_url in self.itemPage.get_actual_url()
         assert self.itemPage.get_item_name() == name

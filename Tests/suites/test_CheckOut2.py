@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 import Config.config
 from Pages.Cart.CartPage import CartPage
@@ -11,6 +12,14 @@ from Tests.test_base import BaseTest
 @allure.suite('Test Checkout 2')
 @allure.sub_suite('Test Checkout 2')
 class Test_CheckOut_2(BaseTest):
+
+    @pytest.fixture(autouse=True)
+    def class_setup(self, init_driver):
+        self.inventoryPage = InventoryPage(self.driver)
+        self.cartPage = CartPage(self.driver)
+        self.checkout1Page = CheckOutPage_1(self.driver)
+        self.checkout2Page = CheckOutPage_2(self.driver)
+
     expected_url = Config.config.Test_Data.BASE_URL
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
     expected_cart_url = Config.config.Test_Data.CART_URL
@@ -21,10 +30,6 @@ class Test_CheckOut_2(BaseTest):
     @allure.title('Checking elements in the second checkout page ')
     @allure.description('Going to the second checkout page and verifying elements')
     def test_checkout2_page(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
-        self.checkout1Page = CheckOutPage_1(self.driver)
-        self.checkout2Page = CheckOutPage_2(self.driver)
 
         self.inventoryPage \
             .enter_cart()
@@ -54,10 +59,6 @@ class Test_CheckOut_2(BaseTest):
     @allure.title('Checking cancelling checkout')
     @allure.description('Going to the checkout and cancelling checkout procedure')
     def test_cancel_checkout(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
-        self.checkout1Page = CheckOutPage_1(self.driver)
-        self.checkout2Page = CheckOutPage_2(self.driver)
 
         self.inventoryPage \
             .enter_cart()
@@ -83,10 +84,6 @@ class Test_CheckOut_2(BaseTest):
     @allure.title('Checking checkout procedure')
     @allure.description('Going to the checkout, verifying price and continue checkout procedure')
     def test_price_checkout(self):
-        self.inventoryPage = InventoryPage(self.driver)
-        self.cartPage = CartPage(self.driver)
-        self.checkout1Page = CheckOutPage_1(self.driver)
-        self.checkout2Page = CheckOutPage_2(self.driver)
 
         self.inventoryPage \
             .add_to_cart()
