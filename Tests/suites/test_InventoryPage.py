@@ -9,7 +9,7 @@ from Tests.test_base import BaseTest
 @allure.sub_suite('Test Inventory')
 class Test_Inventory(BaseTest):
 
-    expected_inventory_title = 'PRODUCTS'
+    expected_inventory_title = 'Products'
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
     expected_url = Config.config.Test_Data.BASE_URL
 

@@ -12,7 +12,6 @@ from Config.config import Test_Data
 @allure.sub_suite('Smoke tests')
 class Test_Smoke(BaseLoginTest):
     expected_url = Config.config.Test_Data.BASE_URL
-    expected_title = 'PRODUCTS'
 
     @allure.severity(allure.severity_level.BLOCKER)
     @allure.title('Verifying login inputs')
@@ -29,7 +28,7 @@ class Test_Smoke(BaseLoginTest):
 @allure.sub_suite('Login Test')
 class Test_Login(BaseLoginTest):
     expected_inventory_url = Config.config.Test_Data.INVENTORY_URL
-    expected_title = 'PRODUCTS'
+    expected_title = 'Products'
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Verifying correct user login procedure')
